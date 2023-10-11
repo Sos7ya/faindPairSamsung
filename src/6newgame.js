@@ -38,7 +38,7 @@ var gameState={
     stage: 0
 }
 
-var game_version = 'v 0.2.5';
+var game_version = 'v 0.2.5s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;
