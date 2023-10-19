@@ -15,16 +15,26 @@ var config = {
 }
 
 var sessionID;
-var gameId = uid();
+var gameId = generateUUID();
 
-sessionID = uid();
+sessionID = generateUUID();
+try{
     var startGameSession = {
-        action: 'startGameSession',
-        allGameSessionId: sessionID,
-        timeStamp: Date.now()
+      action: 'startGameSession',
+      allGameSessionId: sessionID,
+      timeStamp: Date.now()
     }
-    console.log(`session ${startGameSession.allGameSessionId} started!`);
     window?.parent.postMessage(startGameSession, '*');
+  }
+  
+  catch(er){
+    var startGameSessionError = {
+      action: 'startGameSessionError',
+      allGameSessionId: sessionID,
+      timeStamp: Date.now()
+    }
+    window?.parent.postMessage(startGameSessionError, '*');
+  }
 
 
 var game = new Phaser.Game(config);
@@ -38,7 +48,7 @@ var gameState={
     stage: 0
 }
 
-var game_version = 'v 0.2.5s';
+var game_version = 'v 0.2.8s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;

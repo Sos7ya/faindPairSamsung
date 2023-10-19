@@ -30,7 +30,7 @@ window.addEventListener('load', function() {
           return
         }
         //document.getElementById('divlog').innerHTML += evt.detail.direction + '\n';
-        switch(evt.detail.direction){
+        switch(evt.detail?.direction){
           case 'up':
               mainMenu.selectorUp()
               pause.selectorUp()

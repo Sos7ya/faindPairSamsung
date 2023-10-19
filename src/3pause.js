@@ -8,6 +8,29 @@ class Pause extends Phaser.Scene{
         gameState.onGame = false;
         gameState.onMenu = false;
 
+        try{
+            let gamePause = {
+                action: 'gamePause',
+                allGameSessionId: startGame.allGameSessionId,
+                gameSessionId: startGame.gameSessionId,
+                score: gameState.score,
+                timeStamp : Date.now()
+            }
+    
+            window?.parent.postMessage(gamePause, '*');
+        }
+        catch(er){
+            let gamePauseError = {
+                action: 'gamePauseError',
+                allGameSessionId: startGame.allGameSessionId,
+                gameSessionId: startGame.gameSessionId,
+                score: gameState.score,
+                timeStamp : Date.now()
+            }
+    
+            window?.parent.postMessage(gamePauseError, '*');
+        }
+
         this.clickSound = this.sound.add('click', {loop:false});
 
         this.blur = this.add.image(game.config.width/2, game.config.height/2, `bg_${skinIndex}`).setOrigin(0.5);
@@ -96,6 +119,28 @@ class Pause extends Phaser.Scene{
 
     resumeGame(){
         if(gameState.onLate){
+            try{
+                let gameResume = {
+                    action: 'gameResume',
+                    allGameSessionId: startGame.allGameSessionId,
+                    gameSessionId: startGame.gameSessionId,
+                    score: gameState.score,
+                    timeStamp : Date.now()
+                }
+    
+                window?.parent.postMessage(gameResume, '*');
+            }
+            catch(er){
+                let gameResumeError = {
+                    action: 'gameResumeError',
+                    allGameSessionId: startGame.allGameSessionId,
+                    gameSessionId: startGame.gameSessionId,
+                    score: gameState.score,
+                    timeStamp : Date.now()
+                }
+
+                indow?.parent.postMessage(gameResumeError, '*');
+            }
             this.scene.resume(lateGame);
             this.scene.stop();
             gameState.onPause = false;

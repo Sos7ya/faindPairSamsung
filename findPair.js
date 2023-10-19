@@ -1,7 +1,6 @@
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-var _window5;
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -35,73 +34,107 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
   _createClass(Preloader, [{
     key: "preload",
     value: function preload() {
-      this.loadText = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
-        fontFamily: 'RubikOne-Regular',
-        fontSize: 64,
-        color: '#e3f2ed'
-      });
-      this.loadText1 = this.add.text(game.config.width / 2, game.config.height / 2, 'Loading ...', {
-        fontFamily: 'Rubik-Regular',
-        fontSize: 64,
-        color: '#e3f2ed'
-      }).alpha = 0;
-      this.loadText2 = this.add.text(game.config.width / 2, game.config.height / 2, 'Loading ...', {
-        fontFamily: 'Rubik-Medium',
-        fontSize: 64,
-        color: '#e3f2ed'
-      }).alpha = 0;
-      this.loadText3 = this.add.text(game.config.width / 2, game.config.height / 2, 'Loading ...', {
-        fontFamily: 'Rubik-SemiBold',
-        fontSize: 64,
-        color: '#e3f2ed'
-      }).alpha = 0;
-      this.loadText.setOrigin(0.5);
-      this.load.setPath('assets/');
-      this.load.image('cardBack_0', 'images/skins/cardBack_0.png');
-      this.load.image('cardBack_1', 'images/skins/cardBack_1.png');
-      this.load.image('cardBack_2', 'images/skins/cardBack_2.png');
-      this.load.image('cardBack_3', 'images/skins/cardBack_3.png');
-      this.load.image('cardBack_4', 'images/skins/cardBack_4.png');
-      this.load.image('cardBack_5', 'images/skins/cardBack_5.png');
-      this.load.image('bg_0', 'images/skins/bg_0.png');
-      this.load.image('bg_1', 'images/skins/bg_1.png');
-      this.load.image('bg_2', 'images/skins/bg_2.png');
-      this.load.image('bg_3', 'images/skins/bg_3.png');
-      this.load.image('bg_4', 'images/skins/bg_4.png');
-      this.load.image('bg_5', 'images/skins/bg_5.png');
-      this.load.image('mainBg', 'images/mainBg.png');
-      this.load.image('mainSelector', 'images/mainSelector.png');
-      this.load.image('blur', 'images/blur.png');
-      this.load.image('infoMenu', 'images/controlInfo.png');
-      this.load.image('ageInfo', 'images/ageInfo.png');
-      this.load.image('licens', 'images/licens.png');
-      this.load.image('pauseTitle', 'images/pause.png');
-      this.load.image('selector', 'images/selector.png');
-      this.load.image('startEmpty', 'images/startEmpty.png');
-      this.load.image('startSelected', 'images/startSelected.png');
-      this.load.image('exitEmpty', 'images/exitEmpty.png');
-      this.load.image('exitSelected', 'images/exitSelected.png');
-      this.load.image('resumeEmpty', 'images/resumeEmpty.png');
-      this.load.image('resumeSelected', 'images/resumeSelected.png');
-      this.load.image('line', 'images/line.png');
-      this.load.image('red', 'particles/red.png');
-      this.load.image('green', 'particles/green.png');
-      this.load.image('blue', 'particles/blue.png');
-      this.load.image('yellow', 'particles/yellow.png');
-      this.load.image('purple', 'particles/purple.png');
-      this.load.image('orange', 'particles/orange.png');
-      for (var n = 1; n <= 48; n++) {
-        this.load.image("".concat(n), "images/cards/".concat(n, ".png"));
+      try {
+        var _window;
+        var startDownloading = {
+          action: 'startDownloading',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window = window) === null || _window === void 0 || _window.parent.postMessage(startDownloading, '*');
+        this.loadText = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
+          fontFamily: 'RubikOne-Regular',
+          fontSize: 64,
+          color: '#e3f2ed'
+        });
+        this.loadText1 = this.add.text(game.config.width / 2, game.config.height / 2, 'Loading ...', {
+          fontFamily: 'Rubik-Regular',
+          fontSize: 64,
+          color: '#e3f2ed'
+        }).alpha = 0;
+        this.loadText2 = this.add.text(game.config.width / 2, game.config.height / 2, 'Loading ...', {
+          fontFamily: 'Rubik-Medium',
+          fontSize: 64,
+          color: '#e3f2ed'
+        }).alpha = 0;
+        this.loadText3 = this.add.text(game.config.width / 2, game.config.height / 2, 'Loading ...', {
+          fontFamily: 'Rubik-SemiBold',
+          fontSize: 64,
+          color: '#e3f2ed'
+        }).alpha = 0;
+        this.loadText.setOrigin(0.5);
+        this.load.setPath('assets/');
+        this.load.image('cardBack_0', 'images/skins/cardBack_0.png');
+        this.load.image('cardBack_1', 'images/skins/cardBack_1.png');
+        this.load.image('cardBack_2', 'images/skins/cardBack_2.png');
+        this.load.image('cardBack_3', 'images/skins/cardBack_3.png');
+        this.load.image('cardBack_4', 'images/skins/cardBack_4.png');
+        this.load.image('cardBack_5', 'images/skins/cardBack_5.png');
+        this.load.image('bg_0', 'images/skins/bg_0.png');
+        this.load.image('bg_1', 'images/skins/bg_1.png');
+        this.load.image('bg_2', 'images/skins/bg_2.png');
+        this.load.image('bg_3', 'images/skins/bg_3.png');
+        this.load.image('bg_4', 'images/skins/bg_4.png');
+        this.load.image('bg_5', 'images/skins/bg_5.png');
+        this.load.image('mainBg', 'images/mainBg.png');
+        this.load.image('mainSelector', 'images/mainSelector.png');
+        this.load.image('blur', 'images/blur.png');
+        this.load.image('infoMenu', 'images/controlInfo.png');
+        this.load.image('ageInfo', 'images/ageInfo.png');
+        this.load.image('licens', 'images/licens.png');
+        this.load.image('pauseTitle', 'images/pause.png');
+        this.load.image('selector', 'images/selector.png');
+        this.load.image('startEmpty', 'images/startEmpty.png');
+        this.load.image('startSelected', 'images/startSelected.png');
+        this.load.image('exitEmpty', 'images/exitEmpty.png');
+        this.load.image('exitSelected', 'images/exitSelected.png');
+        this.load.image('resumeEmpty', 'images/resumeEmpty.png');
+        this.load.image('resumeSelected', 'images/resumeSelected.png');
+        this.load.image('line', 'images/line.png');
+        this.load.image('red', 'particles/red.png');
+        this.load.image('green', 'particles/green.png');
+        this.load.image('blue', 'particles/blue.png');
+        this.load.image('yellow', 'particles/yellow.png');
+        this.load.image('purple', 'particles/purple.png');
+        this.load.image('orange', 'particles/orange.png');
+        for (var n = 1; n <= 48; n++) {
+          this.load.image("".concat(n), "images/cards/".concat(n, ".png"));
+        }
+        this.load.audio('click', 'sounds/click.mp3');
+        this.load.audio('win', 'sounds/win.mp3');
+        this.load.audio('musik', 'sounds/musik.mp3');
+        this.load.audio('chooseCard', 'sounds/chooseCard.mp3');
+        this.load.audio('pair', 'sounds/pair.mp3');
+      } catch (er) {
+        var _window2;
+        var startDownloadingError = {
+          action: 'startDownloadingError',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(startDownloadingError, '*');
       }
-      this.load.audio('click', 'sounds/click.mp3');
-      this.load.audio('win', 'sounds/win.mp3');
-      this.load.audio('musik', 'sounds/musik.mp3');
-      this.load.audio('chooseCard', 'sounds/chooseCard.mp3');
-      this.load.audio('pair', 'sounds/pair.mp3');
     }
   }, {
     key: "create",
     value: function create() {
+      try {
+        var _window3;
+        var finishDownload = {
+          action: 'finishDownload',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
+      } catch (er) {
+        var _window4;
+        var downloadError = {
+          action: 'downloadError',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
+      }
       this.scene.start('MainMenu');
     }
   }]);
@@ -246,11 +279,22 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
   }, {
     key: "startGame",
     value: function startGame() {
-      var _window;
       gameState.onMenu = false;
-      _startGame.gameSessionId = uid();
-      _startGame.allGameSessionId = sessionID;
-      (_window = window) === null || _window === void 0 || _window.parent.postMessage(_startGame, '*');
+      try {
+        var _window5;
+        _startGame.gameSessionId = generateUUID();
+        _startGame.allGameSessionId = sessionID;
+        (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(_startGame, '*');
+      } catch (er) {
+        var _window6;
+        var startGameError = {
+          action: 'startGameError',
+          allGameSessionId: sessionID,
+          gameSessionId: gameId,
+          timeStamp: Date.now()
+        };
+        (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(startGameError, '*');
+      }
       console.log("started game w: allGame - ".concat(_startGame.allGameSessionId, " and gameId - ").concat(_startGame.gameSessionId));
       this.scene.start('findPair');
     }
@@ -258,13 +302,13 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     key: "exit",
     value: function exit() {
       if (gameState.onMenu) {
-        var _window2;
+        var _window7;
         var closeGameSession = {
           action: 'closeGameSession',
           allGameSessionId: sessionID,
           timeStamp: Date.now()
         };
-        (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(closeGameSession, '*');
+        (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
         console.log('Exit');
       }
     }
@@ -631,6 +675,27 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
       gameState.onPause = true;
       gameState.onGame = false;
       gameState.onMenu = false;
+      try {
+        var _window8;
+        var gamePause = {
+          action: 'gamePause',
+          allGameSessionId: _startGame.allGameSessionId,
+          gameSessionId: _startGame.gameSessionId,
+          score: gameState.score,
+          timeStamp: Date.now()
+        };
+        (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(gamePause, '*');
+      } catch (er) {
+        var _window9;
+        var gamePauseError = {
+          action: 'gamePauseError',
+          allGameSessionId: _startGame.allGameSessionId,
+          gameSessionId: _startGame.gameSessionId,
+          score: gameState.score,
+          timeStamp: Date.now()
+        };
+        (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePauseError, '*');
+      }
       this.clickSound = this.sound.add('click', {
         loop: false
       });
@@ -737,6 +802,27 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "resumeGame",
     value: function resumeGame() {
       if (gameState.onLate) {
+        try {
+          var _window10;
+          var gameResume = {
+            action: 'gameResume',
+            allGameSessionId: _startGame.allGameSessionId,
+            gameSessionId: _startGame.gameSessionId,
+            score: gameState.score,
+            timeStamp: Date.now()
+          };
+          (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gameResume, '*');
+        } catch (er) {
+          var _indow;
+          var gameResumeError = {
+            action: 'gameResumeError',
+            allGameSessionId: _startGame.allGameSessionId,
+            gameSessionId: _startGame.gameSessionId,
+            score: gameState.score,
+            timeStamp: Date.now()
+          };
+          (_indow = indow) === null || _indow === void 0 || _indow.parent.postMessage(gameResumeError, '*');
+        }
         this.scene.resume(lateGame);
         this.scene.stop();
         gameState.onPause = false;
@@ -758,14 +844,14 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "exitGame",
     value: function exitGame() {
       if (gameState.onPause == true) {
-        var _window3;
+        var _window11;
         console.log("Exit!");
         var closeGameSession = {
           action: 'closeGameSession',
           allGameSessionId: sessionID,
           timeStamp: Date.now()
         };
-        (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(closeGameSession, '*');
+        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(closeGameSession, '*');
       }
     }
   }]);
@@ -784,7 +870,7 @@ var NextLvl = /*#__PURE__*/function (_Phaser$Scene5) {
   _createClass(NextLvl, [{
     key: "create",
     value: function create() {
-      var _window4;
+      var _window12;
       gameState.stage += 1;
       var levelUp = {
         action: 'levelUp',
@@ -794,7 +880,7 @@ var NextLvl = /*#__PURE__*/function (_Phaser$Scene5) {
         score: score,
         timeStamp: Date.now()
       };
-      (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(levelUp, '*');
+      (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(levelUp, '*');
       this.bgImage = this.add.image(game.config.width / 2, game.config.height / 2, "bg_".concat(skinIndex));
       this.bgImage.setOrigin(0.5);
       this.bgImage.setDisplaySize(game.config.width, game.config.height);
@@ -1371,15 +1457,25 @@ var config = {
 };
 
 var sessionID;
-var gameId = uid();
-sessionID = uid();
-var startGameSession = {
-  action: 'startGameSession',
-  allGameSessionId: sessionID,
-  timeStamp: Date.now()
-};
-console.log("session ".concat(startGameSession.allGameSessionId, " started!"));
-(_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(startGameSession, '*');
+var gameId = generateUUID();
+sessionID = generateUUID();
+try {
+  var _window13;
+  var startGameSession = {
+    action: 'startGameSession',
+    allGameSessionId: sessionID,
+    timeStamp: Date.now()
+  };
+  (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(startGameSession, '*');
+} catch (er) {
+  var _window14;
+  var startGameSessionError = {
+    action: 'startGameSessionError',
+    allGameSessionId: sessionID,
+    timeStamp: Date.now()
+  };
+  (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameSessionError, '*');
+}
 var game = new Phaser.Game(config);
 var gameState = {
   onGame: false,
@@ -1389,7 +1485,7 @@ var gameState = {
   onLate: false,
   stage: 0
 };
-var game_version = 'v 0.2.5s';
+var game_version = 'v 0.2.8s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;

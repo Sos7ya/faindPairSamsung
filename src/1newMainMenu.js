@@ -123,9 +123,20 @@ class MainMenu extends Phaser.Scene{
     startGame(){
         gameState.onMenu = false;
 
-        startGame.gameSessionId = uid();
-        startGame.allGameSessionId = sessionID;
-        window?.parent.postMessage(startGame, '*');
+        try{
+            startGame.gameSessionId = generateUUID();
+            startGame.allGameSessionId = sessionID;
+            window?.parent.postMessage(startGame, '*');
+        }
+        catch(er){
+            var startGameError = {
+                action: 'startGameError',
+                allGameSessionId : sessionID,
+                gameSessionId: gameId,
+                timeStamp: Date.now()
+            }
+            window?.parent.postMessage(startGameError, '*');
+        }
         console.log(`started game w: allGame - ${startGame.allGameSessionId} and gameId - ${startGame.gameSessionId}`);
 
         this.scene.start('findPair');

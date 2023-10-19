@@ -9,6 +9,14 @@ class Preloader extends Phaser.Scene
 
     preload ()
     {
+        try{
+            let startDownloading = {
+                action: 'startDownloading',
+                allGameSessionId: sessionID,
+                timeStamp: Date.now()
+            }
+            window?.parent.postMessage(startDownloading, '*');
+
         this.loadText = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily: 'RubikOne-Regular', fontSize: 64, color: '#e3f2ed' });
         this.loadText1 = this.add.text(game.config.width/2, game.config.height/2, 'Loading ...', { fontFamily: 'Rubik-Regular', fontSize: 64, color: '#e3f2ed' }).alpha = 0;
         this.loadText2 = this.add.text(game.config.width/2, game.config.height/2, 'Loading ...', { fontFamily: 'Rubik-Medium', fontSize: 64, color: '#e3f2ed' }).alpha = 0;
@@ -68,10 +76,35 @@ class Preloader extends Phaser.Scene
         this.load.audio('musik', 'sounds/musik.mp3');
         this.load.audio('chooseCard', 'sounds/chooseCard.mp3');
         this.load.audio('pair', 'sounds/pair.mp3');
+    }
+    catch(er){
+        let startDownloadingError = {
+            action: 'startDownloadingError',
+            allGameSessionId: sessionID,
+            timeStamp: Date.now()
+        }
+        window?.parent.postMessage(startDownloadingError, '*');
+    }
 
     }
     create ()
     {
+        try{
+            let finishDownload = {
+                action: 'finishDownload',
+                allGameSessionId: sessionID,
+                timeStamp: Date.now()
+            }
+            window?.parent.postMessage(finishDownload, '*')
+        }
+        catch(er){
+            let downloadError = {
+                action: 'downloadError',
+                allGameSessionId: sessionID,
+                timeStamp: Date.now()
+            }
+            window?.parent.postMessage(downloadError, '*')
+        }
         this.scene.start('MainMenu');
         
     }
