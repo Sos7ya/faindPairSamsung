@@ -1,5 +1,5 @@
 var config = {
-    type: Phaser.WEBGL,
+    type: Phaser.CANVAS,
     width: 1920,
     height: 1080,
     backgroundColor: '#8EDD73',
@@ -48,7 +48,7 @@ var gameState={
     stage: 0
 }
 
-var game_version = 'v 0.2.8s';
+var game_version = 'v 0.2.9s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;

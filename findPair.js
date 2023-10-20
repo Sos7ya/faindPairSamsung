@@ -225,7 +225,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     key: "loadScore",
     value: function loadScore() {
       if (localStorage.getItem('heighScore_pair')) {
-        console.log(localStorage.getItem('heighScore_pair'));
         this.hieghScoreText = this.add.text(game.config.width / 2, game.config.height - 100, "".concat(JSON.parse(localStorage.getItem('heighScore_pair'))), {
           fontFamily: 'Rubik-Medium',
           fontStyle: 'normal',
@@ -295,7 +294,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
         };
         (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(startGameError, '*');
       }
-      console.log("started game w: allGame - ".concat(_startGame.allGameSessionId, " and gameId - ").concat(_startGame.gameSessionId));
       this.scene.start('findPair');
     }
   }, {
@@ -309,7 +307,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
           timeStamp: Date.now()
         };
         (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
-        console.log('Exit');
       }
     }
   }, {
@@ -367,7 +364,6 @@ var FindPair = /*#__PURE__*/function (_Phaser$Scene3) {
       for (var n = 1; n <= 49; n++) {
         animalArray.push("".concat(n));
       }
-      console.log(animalArray);
       var playArr = [];
       // for (let n = 0; n < numAnimals; n++) {
       //     playArr.push(animalArray[Math.floor(Math.random() * (animalArray.length-1)) === 0 ? 1 : Math.floor(Math.random() * (animalArray.length-1))]);
@@ -449,8 +445,6 @@ var FindPair = /*#__PURE__*/function (_Phaser$Scene3) {
           });
         }
       });
-      console.log(shuffleArray);
-      console.log(this.boardArray);
       this.input.keyboard.on('keydown-SPACE', function () {
         _this5.scene.start(nextLvl);
         _this5.bgmusic.stop();
@@ -746,7 +740,6 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "loadScore",
     value: function loadScore() {
       if (localStorage.getItem('heighScore_pair')) {
-        console.log(localStorage.getItem('heighScore_pair'));
         this.hieghScoreText = this.add.text(game.config.width / 2 + 150, game.config.height - 100, "".concat(JSON.parse(localStorage.getItem('heighScore_pair'))), {
           fontFamily: 'Rubik-Medium',
           fontStyle: 'normal',
@@ -845,7 +838,6 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
     value: function exitGame() {
       if (gameState.onPause == true) {
         var _window11;
-        console.log("Exit!");
         var closeGameSession = {
           action: 'closeGameSession',
           allGameSessionId: sessionID,
@@ -1190,7 +1182,6 @@ var LateGame = /*#__PURE__*/function (_Phaser$Scene6) {
           _this7.pauseGame();
         }
       });
-      console.log(animals[0].texture.key);
       this.targets = this.cards.getChildren();
       this.boardArray[0][0].cardSelected = true;
       this.selector = this.add.image(this.boardArray[0][0].cardBackSprite.x, this.boardArray[0][0].cardBackSprite.y, 'selector').setOrigin(0.5);
@@ -1220,7 +1211,6 @@ var LateGame = /*#__PURE__*/function (_Phaser$Scene6) {
           });
         }
       });
-      console.log(numAnimals);
       this.input.keyboard.on('keydown-SPACE', function () {
         _this7.scene.start(nextLvl);
         _this7.bgmusic.stop();
@@ -1441,7 +1431,7 @@ var LateGame = /*#__PURE__*/function (_Phaser$Scene6) {
 }(Phaser.Scene);
 var lateGame = new LateGame();
 var config = {
-  type: Phaser.WEBGL,
+  type: Phaser.CANVAS,
   width: 1920,
   height: 1080,
   backgroundColor: '#8EDD73',
@@ -1485,7 +1475,7 @@ var gameState = {
   onLate: false,
   stage: 0
 };
-var game_version = 'v 0.2.8s';
+var game_version = 'v 0.2.9s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;

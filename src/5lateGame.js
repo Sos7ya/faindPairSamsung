@@ -153,9 +153,6 @@ class LateGame extends Phaser.Scene{
                 this.pauseGame()
             }
         })
-
-        console.log(animals[0].texture.key)
-
         this.targets = this.cards.getChildren();
 
         this.boardArray[0][0].cardSelected = true
@@ -187,10 +184,6 @@ class LateGame extends Phaser.Scene{
             }
 
         })
-
-        
-       console.log(numAnimals)
-
        this.input.keyboard.on('keydown-SPACE', ()=>{this.scene.start(nextLvl); this.bgmusic.stop();}, this)
 
        this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, `${game_version}`, { fontFamily:'Rubik-Medium', fontStyle:'bold', fontSize: '30px', fill: '#fff' }).setOrigin(0.5);

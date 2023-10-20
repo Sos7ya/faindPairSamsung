@@ -73,8 +73,6 @@ class Pause extends Phaser.Scene{
 
     loadScore(){
         if(localStorage.getItem('heighScore_pair')){
-            console.log(localStorage.getItem('heighScore_pair'))
-
             this.hieghScoreText = this.add.text(game.config.width/2+150, game.config.height - 100, `${JSON.parse(localStorage.getItem('heighScore_pair'))}`, { fontFamily:'Rubik-Medium', fontStyle:'normal', fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
             this.hieghScoreTitle = this.add.text(this.hieghScoreText.x, this.hieghScoreText.y-75, 'Рекорд', {fontFamily: 'Rubik-Regular', fontSize: '48px', fill: '#D0DBD1'}).setOrigin(0.5);
             this.line = this.add.image(game.config.width/2, game.config.height - 100, 'line').setOrigin(0.5);
@@ -162,7 +160,6 @@ class Pause extends Phaser.Scene{
 
     exitGame(){
         if(gameState.onPause==true){
-            console.log("Exit!")
         let closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId : sessionID,

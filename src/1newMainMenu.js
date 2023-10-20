@@ -78,7 +78,6 @@ class MainMenu extends Phaser.Scene{
 
     loadScore(){
         if(localStorage.getItem('heighScore_pair')){
-            console.log(localStorage.getItem('heighScore_pair'))
             this.hieghScoreText = this.add.text(game.config.width/2, game.config.height - 100, `${JSON.parse(localStorage.getItem('heighScore_pair'))}`, { fontFamily:'Rubik-Medium', fontStyle:'normal', fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
             this.hieghScoreTitle = this.add.text(this.hieghScoreText.x, this.hieghScoreText.y-75, 'Рекорд', {fontFamily: 'Rubik-Regular', fontSize: '48px', fill: '#D0DBD1'}).setOrigin(0.5);
         }
@@ -137,8 +136,6 @@ class MainMenu extends Phaser.Scene{
             }
             window?.parent.postMessage(startGameError, '*');
         }
-        console.log(`started game w: allGame - ${startGame.allGameSessionId} and gameId - ${startGame.gameSessionId}`);
-
         this.scene.start('findPair');
     }
     exit(){
@@ -150,7 +147,6 @@ class MainMenu extends Phaser.Scene{
             }
     
             window?.parent.postMessage(closeGameSession, '*');
-            console.log('Exit');
         }
     }
 

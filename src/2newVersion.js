@@ -31,9 +31,6 @@ class FindPair extends Phaser.Scene{
         for(let n = 1; n <= 49; n++){
             animalArray.push(`${n}`);
         }
-        console.log(animalArray)
-
-        
 
        let playArr = [];
         // for (let n = 0; n < numAnimals; n++) {
@@ -136,8 +133,6 @@ class FindPair extends Phaser.Scene{
 
         })
         
-        console.log(shuffleArray);
-        console.log(this.boardArray);
         this.input.keyboard.on('keydown-SPACE', ()=>{this.scene.start(nextLvl); this.bgmusic.stop();}, this)
         document.addEventListener('keydown',(e)=>{
             if((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onGame&& gameState.onLate==false){
