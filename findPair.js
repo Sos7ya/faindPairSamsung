@@ -300,13 +300,16 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     key: "exit",
     value: function exit() {
       if (gameState.onMenu) {
-        var _window7;
-        var closeGameSession = {
-          action: 'closeGameSession',
-          allGameSessionId: sessionID,
-          timeStamp: Date.now()
-        };
-        (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+        if (!posted) {
+          var _window7;
+          var closeGameSession = {
+            action: 'closeGameSession',
+            allGameSessionId: sessionID,
+            timeStamp: Date.now()
+          };
+          (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+          posted = true;
+        }
       }
     }
   }, {
@@ -801,7 +804,7 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
             action: 'gameResume',
             allGameSessionId: _startGame.allGameSessionId,
             gameSessionId: _startGame.gameSessionId,
-            score: gameState.score,
+            score: score,
             timeStamp: Date.now()
           };
           (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gameResume, '*');
@@ -811,7 +814,7 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
             action: 'gameResumeError',
             allGameSessionId: _startGame.allGameSessionId,
             gameSessionId: _startGame.gameSessionId,
-            score: gameState.score,
+            score: score,
             timeStamp: Date.now()
           };
           (_indow = indow) === null || _indow === void 0 || _indow.parent.postMessage(gameResumeError, '*');
@@ -837,13 +840,25 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "exitGame",
     value: function exitGame() {
       if (gameState.onPause == true) {
-        var _window11;
-        var closeGameSession = {
-          action: 'closeGameSession',
-          allGameSessionId: sessionID,
-          timeStamp: Date.now()
-        };
-        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(closeGameSession, '*');
+        if (!posted) {
+          var _window11, _window12;
+          var closeGameSession = {
+            action: 'closeGameSession',
+            allGameSessionId: sessionID,
+            timeStamp: Date.now()
+          };
+          var gameOver = {
+            action: 'gameOver',
+            allGameSessionId: sessionID,
+            gameSessionId: _startGame.gameSessionId,
+            score: score,
+            lvl: gameState.stage,
+            timeStamp: Date.now()
+          };
+          (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameOver, '*');
+          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(closeGameSession, '*');
+          posted = true;
+        }
       }
     }
   }]);
@@ -862,7 +877,7 @@ var NextLvl = /*#__PURE__*/function (_Phaser$Scene5) {
   _createClass(NextLvl, [{
     key: "create",
     value: function create() {
-      var _window12;
+      var _window13;
       gameState.stage += 1;
       var levelUp = {
         action: 'levelUp',
@@ -872,7 +887,7 @@ var NextLvl = /*#__PURE__*/function (_Phaser$Scene5) {
         score: score,
         timeStamp: Date.now()
       };
-      (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(levelUp, '*');
+      (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(levelUp, '*');
       this.bgImage = this.add.image(game.config.width / 2, game.config.height / 2, "bg_".concat(skinIndex));
       this.bgImage.setOrigin(0.5);
       this.bgImage.setDisplaySize(game.config.width, game.config.height);
@@ -1450,21 +1465,21 @@ var sessionID;
 var gameId = generateUUID();
 sessionID = generateUUID();
 try {
-  var _window13;
+  var _window14;
   var startGameSession = {
     action: 'startGameSession',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(startGameSession, '*');
+  (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameSession, '*');
 } catch (er) {
-  var _window14;
+  var _window15;
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameSessionError, '*');
+  (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(startGameSessionError, '*');
 }
 var game = new Phaser.Game(config);
 var gameState = {
@@ -1475,7 +1490,7 @@ var gameState = {
   onLate: false,
   stage: 0
 };
-var game_version = 'v 0.2.9s';
+var game_version = 'v 0.3.0s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;
@@ -1488,3 +1503,4 @@ var boardCols;
 var boardOffSet = 0;
 var score = 0;
 var highScore;
+var posted = false;

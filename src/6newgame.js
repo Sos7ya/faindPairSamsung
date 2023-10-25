@@ -48,7 +48,7 @@ var gameState={
     stage: 0
 }
 
-var game_version = 'v 0.2.9s';
+var game_version = 'v 0.3.0s';
 var numAnimals = 2;
 var maxImageWidth = 300;
 var maxImageHeight = 300;
@@ -61,3 +61,4 @@ var boardCols;
 var boardOffSet = 0
 var score = 0;
 var highScore;
+var posted = false;

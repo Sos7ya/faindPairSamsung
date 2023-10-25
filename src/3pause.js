@@ -122,7 +122,7 @@ class Pause extends Phaser.Scene{
                     action: 'gameResume',
                     allGameSessionId: startGame.allGameSessionId,
                     gameSessionId: startGame.gameSessionId,
-                    score: gameState.score,
+                    score: score,
                     timeStamp : Date.now()
                 }
     
@@ -133,7 +133,7 @@ class Pause extends Phaser.Scene{
                     action: 'gameResumeError',
                     allGameSessionId: startGame.allGameSessionId,
                     gameSessionId: startGame.gameSessionId,
-                    score: gameState.score,
+                    score: score,
                     timeStamp : Date.now()
                 }
 
@@ -160,17 +160,26 @@ class Pause extends Phaser.Scene{
 
     exitGame(){
         if(gameState.onPause==true){
-        let closeGameSession = {
-            action: 'closeGameSession',
-            allGameSessionId : sessionID,
-            timeStamp : Date.now()
-        }
-
-        window?.parent.postMessage(closeGameSession, '*');
+            if(!posted){
+                let closeGameSession = {
+                    action: 'closeGameSession',
+                    allGameSessionId : sessionID,
+                    timeStamp : Date.now()
+                }
+                let gameOver = {
+                    action: 'gameOver',
+                    allGameSessionId : sessionID,
+                    gameSessionId : startGame.gameSessionId,
+                    score : score,
+                    lvl: gameState.stage,
+                    timeStamp : Date.now()
+                }
+                window?.parent.postMessage(gameOver, '*');
+                window?.parent.postMessage(closeGameSession, '*');
+                posted = true;
+            }
         }
     }
-
-
 }
 
 var pause = new Pause();
