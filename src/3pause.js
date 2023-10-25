@@ -148,6 +148,30 @@ class Pause extends Phaser.Scene{
             }, 1000);
         }
         else{
+
+            try{
+                let gameResume = {
+                    action: 'gameResume',
+                    allGameSessionId: startGame.allGameSessionId,
+                    gameSessionId: startGame.gameSessionId,
+                    score: score,
+                    timeStamp : Date.now()
+                }
+    
+                window?.parent.postMessage(gameResume, '*');
+            }
+            catch(er){
+                let gameResumeError = {
+                    action: 'gameResumeError',
+                    allGameSessionId: startGame.allGameSessionId,
+                    gameSessionId: startGame.gameSessionId,
+                    score: score,
+                    timeStamp : Date.now()
+                }
+
+                indow?.parent.postMessage(gameResumeError, '*');
+            }
+
             this.scene.resume(findPair);
             this.scene.stop();
             gameState.onPause = false;

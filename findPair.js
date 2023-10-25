@@ -827,6 +827,27 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
           lateGame.canMove = true;
         }, 1000);
       } else {
+        try {
+          var _window11;
+          var _gameResume = {
+            action: 'gameResume',
+            allGameSessionId: _startGame.allGameSessionId,
+            gameSessionId: _startGame.gameSessionId,
+            score: score,
+            timeStamp: Date.now()
+          };
+          (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(_gameResume, '*');
+        } catch (er) {
+          var _indow2;
+          var _gameResumeError = {
+            action: 'gameResumeError',
+            allGameSessionId: _startGame.allGameSessionId,
+            gameSessionId: _startGame.gameSessionId,
+            score: score,
+            timeStamp: Date.now()
+          };
+          (_indow2 = indow) === null || _indow2 === void 0 || _indow2.parent.postMessage(_gameResumeError, '*');
+        }
         this.scene.resume(findPair);
         this.scene.stop();
         gameState.onPause = false;
@@ -841,7 +862,7 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
     value: function exitGame() {
       if (gameState.onPause == true) {
         if (!posted) {
-          var _window11, _window12;
+          var _window12, _window13;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
@@ -855,8 +876,8 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
             lvl: gameState.stage,
             timeStamp: Date.now()
           };
-          (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameOver, '*');
-          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(closeGameSession, '*');
+          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(gameOver, '*');
+          (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -877,7 +898,7 @@ var NextLvl = /*#__PURE__*/function (_Phaser$Scene5) {
   _createClass(NextLvl, [{
     key: "create",
     value: function create() {
-      var _window13;
+      var _window14;
       gameState.stage += 1;
       var levelUp = {
         action: 'levelUp',
@@ -887,7 +908,7 @@ var NextLvl = /*#__PURE__*/function (_Phaser$Scene5) {
         score: score,
         timeStamp: Date.now()
       };
-      (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(levelUp, '*');
+      (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(levelUp, '*');
       this.bgImage = this.add.image(game.config.width / 2, game.config.height / 2, "bg_".concat(skinIndex));
       this.bgImage.setOrigin(0.5);
       this.bgImage.setDisplaySize(game.config.width, game.config.height);
@@ -1465,21 +1486,21 @@ var sessionID;
 var gameId = generateUUID();
 sessionID = generateUUID();
 try {
-  var _window14;
+  var _window15;
   var startGameSession = {
     action: 'startGameSession',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameSession, '*');
+  (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(startGameSession, '*');
 } catch (er) {
-  var _window15;
+  var _window16;
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(startGameSessionError, '*');
+  (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(startGameSessionError, '*');
 }
 var game = new Phaser.Game(config);
 var gameState = {
