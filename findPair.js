@@ -126,6 +126,7 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           timeStamp: Date.now()
         };
         (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
+        this.scene.start('MainMenu');
       } catch (er) {
         var _window4;
         var downloadError = {
@@ -135,7 +136,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         };
         (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
       }
-      this.scene.start('MainMenu');
     }
   }]);
   return Preloader;
@@ -284,6 +284,7 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
         _startGame.gameSessionId = generateUUID();
         _startGame.allGameSessionId = sessionID;
         (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(_startGame, '*');
+        this.scene.start('findPair');
       } catch (er) {
         var _window6;
         var startGameError = {
@@ -294,7 +295,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
         };
         (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(startGameError, '*');
       }
-      this.scene.start('findPair');
     }
   }, {
     key: "exit",
@@ -682,6 +682,51 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
           timeStamp: Date.now()
         };
         (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(gamePause, '*');
+        this.clickSound = this.sound.add('click', {
+          loop: false
+        });
+        this.blur = this.add.image(game.config.width / 2, game.config.height / 2, "bg_".concat(skinIndex)).setOrigin(0.5);
+        this.blur.setDisplaySize(game.config.width, game.config.height);
+        this.blur.alpha = 1;
+        this.pauseBg = this.add.image(game.config.width / 2, game.config.height / 4, 'pauseTitle').setOrigin(0.5);
+        this.resumeBtn = this.add.image(game.config.width / 2, game.config.height / 2 + 50, 'resumeBtn').setOrigin(0.5);
+        this.exitBtn = this.add.image(this.resumeBtn.x, this.resumeBtn.y + 130, 'exitBtn').setOrigin(0.5);
+        this.resumeBtn.alpha = 0;
+        this.exitBtn.alpha = 0;
+        this.selector = this.add.image(this.resumeBtn.x, this.resumeBtn.y, 'mainSelector').setOrigin(0.5);
+        this.selector.setDisplaySize(700, 200);
+
+        // this.resumeText = this.add.text(this.resumeBtn.x, this.resumeBtn.y, 'ПРОДОЛЖИТЬ', {fontFamily: 'RubikOne-Regular', fontSize: '64px', fill: '#1A61B6'}).setOrigin(0.5);
+        // this.exitText = this.add.text(this.exitBtn.x, this.exitBtn.y, 'ВЫЙТИ', {fontFamily: 'RubikOne-Regular', fontSize: '64px', fill: '#fff'}).setOrigin(0.5);
+        this.resumeText = this.add.image(this.resumeBtn.x, this.resumeBtn.y, 'resumeSelected').setOrigin(0.5);
+        this.exitText = this.add.image(this.exitBtn.x, this.exitBtn.y, 'exitEmpty').setOrigin(0.5);
+        this.resumeBtn.setInteractive();
+        this.exitBtn.setInteractive();
+        this.resumeBtn.on('pointerdown', this.resumeGame, this);
+        this.exitBtn.on('pointerdown', this.exitGame, this);
+        this.scoreText = this.add.text(game.config.width / 2 - 150, game.config.height - 100, "".concat(score), {
+          fontFamily: 'Rubik-Medium',
+          fontStyle: 'normal',
+          fontSize: '64px',
+          fill: '#fff'
+        }).setOrigin(0.5);
+        this.scoreTitle = this.add.text(this.scoreText.x, this.scoreText.y - 75, 'Счет', {
+          fontFamily: 'Rubik-Regular',
+          fontSize: '48px',
+          fill: '#D0DBD1'
+        }).setOrigin(0.5);
+        this.loadScore();
+        this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
+          fontFamily: 'Rubik-Medium',
+          fontStyle: 'bold',
+          fontSize: '30px',
+          fill: '#fff'
+        }).setOrigin(0.5);
+        document.addEventListener('keydown', function (e) {
+          if (e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) {
+            _this6.exitGame();
+          }
+        });
       } catch (er) {
         var _window9;
         var gamePauseError = {
@@ -693,51 +738,6 @@ var Pause = /*#__PURE__*/function (_Phaser$Scene4) {
         };
         (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePauseError, '*');
       }
-      this.clickSound = this.sound.add('click', {
-        loop: false
-      });
-      this.blur = this.add.image(game.config.width / 2, game.config.height / 2, "bg_".concat(skinIndex)).setOrigin(0.5);
-      this.blur.setDisplaySize(game.config.width, game.config.height);
-      this.blur.alpha = 1;
-      this.pauseBg = this.add.image(game.config.width / 2, game.config.height / 4, 'pauseTitle').setOrigin(0.5);
-      this.resumeBtn = this.add.image(game.config.width / 2, game.config.height / 2 + 50, 'resumeBtn').setOrigin(0.5);
-      this.exitBtn = this.add.image(this.resumeBtn.x, this.resumeBtn.y + 130, 'exitBtn').setOrigin(0.5);
-      this.resumeBtn.alpha = 0;
-      this.exitBtn.alpha = 0;
-      this.selector = this.add.image(this.resumeBtn.x, this.resumeBtn.y, 'mainSelector').setOrigin(0.5);
-      this.selector.setDisplaySize(700, 200);
-
-      // this.resumeText = this.add.text(this.resumeBtn.x, this.resumeBtn.y, 'ПРОДОЛЖИТЬ', {fontFamily: 'RubikOne-Regular', fontSize: '64px', fill: '#1A61B6'}).setOrigin(0.5);
-      // this.exitText = this.add.text(this.exitBtn.x, this.exitBtn.y, 'ВЫЙТИ', {fontFamily: 'RubikOne-Regular', fontSize: '64px', fill: '#fff'}).setOrigin(0.5);
-      this.resumeText = this.add.image(this.resumeBtn.x, this.resumeBtn.y, 'resumeSelected').setOrigin(0.5);
-      this.exitText = this.add.image(this.exitBtn.x, this.exitBtn.y, 'exitEmpty').setOrigin(0.5);
-      this.resumeBtn.setInteractive();
-      this.exitBtn.setInteractive();
-      this.resumeBtn.on('pointerdown', this.resumeGame, this);
-      this.exitBtn.on('pointerdown', this.exitGame, this);
-      this.scoreText = this.add.text(game.config.width / 2 - 150, game.config.height - 100, "".concat(score), {
-        fontFamily: 'Rubik-Medium',
-        fontStyle: 'normal',
-        fontSize: '64px',
-        fill: '#fff'
-      }).setOrigin(0.5);
-      this.scoreTitle = this.add.text(this.scoreText.x, this.scoreText.y - 75, 'Счет', {
-        fontFamily: 'Rubik-Regular',
-        fontSize: '48px',
-        fill: '#D0DBD1'
-      }).setOrigin(0.5);
-      this.loadScore();
-      this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
-        fontFamily: 'Rubik-Medium',
-        fontStyle: 'bold',
-        fontSize: '30px',
-        fill: '#fff'
-      }).setOrigin(0.5);
-      document.addEventListener('keydown', function (e) {
-        if (e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) {
-          _this6.exitGame();
-        }
-      });
     }
   }, {
     key: "loadScore",

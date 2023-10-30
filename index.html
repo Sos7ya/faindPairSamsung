@@ -54,19 +54,16 @@
 
     window.addEventListener("load", (event) => {
       gameDiv.focus();
-      console.log(`Game div in focus! ${document.activeElement}`);
     });
 
     gameDiv.onblur = function () {
       gameDiv.focus();
-      console.log(`Game div in focus! ${document.activeElement}`);
     }
 
     window.addEventListener('focus', (e)=>{
         gameDiv.focus();
     })
     window.addEventListener('blur', (e)=>{
-        console.log('Game was on blur!');
         gameDiv.focus();
     })
   </script>

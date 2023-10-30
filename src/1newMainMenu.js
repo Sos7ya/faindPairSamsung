@@ -126,6 +126,8 @@ class MainMenu extends Phaser.Scene{
             startGame.gameSessionId = generateUUID();
             startGame.allGameSessionId = sessionID;
             window?.parent.postMessage(startGame, '*');
+
+            this.scene.start('findPair');
         }
         catch(er){
             var startGameError = {
@@ -136,7 +138,6 @@ class MainMenu extends Phaser.Scene{
             }
             window?.parent.postMessage(startGameError, '*');
         }
-        this.scene.start('findPair');
     }
     exit(){
         if(gameState.onMenu){

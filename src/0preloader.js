@@ -95,7 +95,8 @@ class Preloader extends Phaser.Scene
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(finishDownload, '*')
+            window?.parent.postMessage(finishDownload, '*');
+            this.scene.start('MainMenu');
         }
         catch(er){
             let downloadError = {
@@ -105,8 +106,6 @@ class Preloader extends Phaser.Scene
             }
             window?.parent.postMessage(downloadError, '*')
         }
-        this.scene.start('MainMenu');
-        
     }
 }
 

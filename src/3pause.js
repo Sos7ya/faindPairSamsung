@@ -18,18 +18,7 @@ class Pause extends Phaser.Scene{
             }
     
             window?.parent.postMessage(gamePause, '*');
-        }
-        catch(er){
-            let gamePauseError = {
-                action: 'gamePauseError',
-                allGameSessionId: startGame.allGameSessionId,
-                gameSessionId: startGame.gameSessionId,
-                score: gameState.score,
-                timeStamp : Date.now()
-            }
-    
-            window?.parent.postMessage(gamePauseError, '*');
-        }
+
 
         this.clickSound = this.sound.add('click', {loop:false});
 
@@ -69,6 +58,19 @@ class Pause extends Phaser.Scene{
                 this.exitGame()
             }
         })
+
+    }
+    catch(er){
+        let gamePauseError = {
+            action: 'gamePauseError',
+            allGameSessionId: startGame.allGameSessionId,
+            gameSessionId: startGame.gameSessionId,
+            score: gameState.score,
+            timeStamp : Date.now()
+        }
+
+        window?.parent.postMessage(gamePauseError, '*');
+    }
     }
 
     loadScore(){
