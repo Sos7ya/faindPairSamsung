@@ -17,7 +17,7 @@ class Pause extends Phaser.Scene{
                 timeStamp : Date.now()
             }
     
-            window?.parent.postMessage(gamePause, '*');
+            window?.parent.postMessage(gamePause, parentOrigin);
 
 
         this.clickSound = this.sound.add('click', {loop:false});
@@ -69,7 +69,7 @@ class Pause extends Phaser.Scene{
             timeStamp : Date.now()
         }
 
-        window?.parent.postMessage(gamePauseError, '*');
+        window?.parent.postMessage(gamePauseError, parentOrigin);
     }
     }
 
@@ -128,7 +128,7 @@ class Pause extends Phaser.Scene{
                     timeStamp : Date.now()
                 }
     
-                window?.parent.postMessage(gameResume, '*');
+                window?.parent.postMessage(gameResume, parentOrigin);
             }
             catch(er){
                 let gameResumeError = {
@@ -139,7 +139,7 @@ class Pause extends Phaser.Scene{
                     timeStamp : Date.now()
                 }
 
-                indow?.parent.postMessage(gameResumeError, '*');
+                indow?.parent.postMessage(gameResumeError, parentOrigin);
             }
             this.scene.resume(lateGame);
             this.scene.stop();
@@ -160,7 +160,7 @@ class Pause extends Phaser.Scene{
                     timeStamp : Date.now()
                 }
     
-                window?.parent.postMessage(gameResume, '*');
+                window?.parent.postMessage(gameResume, parentOrigin);
             }
             catch(er){
                 let gameResumeError = {
@@ -171,7 +171,7 @@ class Pause extends Phaser.Scene{
                     timeStamp : Date.now()
                 }
 
-                indow?.parent.postMessage(gameResumeError, '*');
+                indow?.parent.postMessage(gameResumeError, parentOrigin);
             }
 
             this.scene.resume(findPair);
@@ -200,8 +200,8 @@ class Pause extends Phaser.Scene{
                     lvl: gameState.stage,
                     timeStamp : Date.now()
                 }
-                window?.parent.postMessage(gameOver, '*');
-                window?.parent.postMessage(closeGameSession, '*');
+                window?.parent.postMessage(gameOver, parentOrigin);
+                window?.parent.postMessage(closeGameSession, parentOrigin);
                 posted = true;
             }
         }

@@ -15,7 +15,7 @@ class Preloader extends Phaser.Scene
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(startDownloading, '*');
+            window?.parent.postMessage(startDownloading, parentOrigin);
 
         this.loadText = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily: 'RubikOne-Regular', fontSize: 64, color: '#e3f2ed' });
         this.loadText1 = this.add.text(game.config.width/2, game.config.height/2, 'Loading ...', { fontFamily: 'Rubik-Regular', fontSize: 64, color: '#e3f2ed' }).alpha = 0;
@@ -83,7 +83,7 @@ class Preloader extends Phaser.Scene
             allGameSessionId: sessionID,
             timeStamp: Date.now()
         }
-        window?.parent.postMessage(startDownloadingError, '*');
+        window?.parent.postMessage(startDownloadingError, parentOrigin);
     }
 
     }
@@ -95,7 +95,7 @@ class Preloader extends Phaser.Scene
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(finishDownload, '*');
+            window?.parent.postMessage(finishDownload, parentOrigin);
             this.scene.start('MainMenu');
         }
         catch(er){
@@ -104,7 +104,7 @@ class Preloader extends Phaser.Scene
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(downloadError, '*')
+            window?.parent.postMessage(downloadError, parentOrigin)
         }
     }
 }

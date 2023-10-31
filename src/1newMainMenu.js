@@ -125,7 +125,7 @@ class MainMenu extends Phaser.Scene{
         try{
             startGame.gameSessionId = generateUUID();
             startGame.allGameSessionId = sessionID;
-            window?.parent.postMessage(startGame, '*');
+            window?.parent.postMessage(startGame, parentOrigin);
 
             this.scene.start('findPair');
         }
@@ -136,7 +136,7 @@ class MainMenu extends Phaser.Scene{
                 gameSessionId: gameId,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(startGameError, '*');
+            window?.parent.postMessage(startGameError, parentOrigin);
         }
     }
     exit(){
@@ -148,7 +148,7 @@ class MainMenu extends Phaser.Scene{
                     timeStamp : Date.now()
                 }
         
-                window?.parent.postMessage(closeGameSession, '*');
+                window?.parent.postMessage(closeGameSession, parentOrigin);
                 posted = true;
             }
         }

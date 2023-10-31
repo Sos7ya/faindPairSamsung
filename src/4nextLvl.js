@@ -14,7 +14,7 @@ class NextLvl extends Phaser.Scene{
             score: score,
             timeStamp: Date.now()
         }
-        window?.parent.postMessage(levelUp, '*');
+        window?.parent.postMessage(levelUp, parentOrigin);
 
         this.bgImage = this.add.image(game.config.width/2, game.config.height/2, `bg_${skinIndex}`);
         this.bgImage.setOrigin(0.5);

@@ -15,16 +15,24 @@ var config = {
 }
 
 var sessionID;
+var parentOrigin;
 var gameId = generateUUID();
 
 sessionID = generateUUID();
+if(document.referrer){
+  parentOrigin = document.referrer
+  console.log(parentOrigin);
+}
+else{
+  parentOrigin = parentOrigin;
+}
 try{
     var startGameSession = {
       action: 'startGameSession',
       allGameSessionId: sessionID,
       timeStamp: Date.now()
     }
-    window?.parent.postMessage(startGameSession, '*');
+    window?.parent.postMessage(startGameSession, parentOrigin);
   }
   
   catch(er){
@@ -33,7 +41,7 @@ try{
       allGameSessionId: sessionID,
       timeStamp: Date.now()
     }
-    window?.parent.postMessage(startGameSessionError, '*');
+    window?.parent.postMessage(startGameSessionError, parentOrigin);
   }
 
 
