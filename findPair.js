@@ -1477,11 +1477,10 @@ var config = {
     mode: Phaser.Scale.FIT
   },
   audio: {
-    disableWebAudio: true
-    // noAudio: true,
+    disableWebAudio: true,
+    noAudio: true
   }
 };
-
 var sessionID;
 var parentOrigin;
 var gameId = generateUUID();
@@ -1516,7 +1515,7 @@ var gameState = {
   onPause: false,
   isOver: false,
   onLate: false,
-  stage: 0
+  stage: 1
 };
 var game_version = 'v 0.3.0s';
 var numAnimals = 2;

@@ -10,7 +10,7 @@ var config = {
     },
     audio: {
         disableWebAudio: true,
-        // noAudio: true,
+        noAudio: true,
     }
 }
 
@@ -53,7 +53,7 @@ var gameState={
     onPause: false,
     isOver: false,
     onLate: false,
-    stage: 0
+    stage: 1
 }
 
 var game_version = 'v 0.3.0s';
